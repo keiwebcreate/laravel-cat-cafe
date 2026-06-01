@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Admin\AdminBlogController;
 
 // Route::get('/', function () {
 //     return view('index');
@@ -10,6 +11,10 @@ use App\Http\Controllers\ContactController;
 Route::view('/' , 'index');
 
 // 問い合わせフォーム
-Route::get('contact', [ContactController::class, 'index'])->name('contact');
-Route::post('contact', [ContactController::class, 'sendMail']);
-Route::get('contact/complete', [ContactController::class, 'complete'])->name('contact.complete');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'sendMail']);
+Route::get('/contact/complete', [ContactController::class, 'complete'])->name('contact.complete');
+
+// blog
+Route::get('/admin/blogs', [AdminBlogController::class, 'index']);
+Route::get('/admin/blogs/create', [AdminBlogController::class, 'create']);
