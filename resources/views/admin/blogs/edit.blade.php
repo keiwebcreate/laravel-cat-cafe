@@ -63,9 +63,11 @@
 
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2">登場するねこ</label>
-                        <select id="js-pulldown" class="mr-6 w-full" name="category_id" multiple>
-                            <option value="" disabled selected>選択してください</option>
-                            
+                        <select id="js-pulldown" class="mr-6 w-full" name="cats[]" multiple>
+                            <option value="" disabled>選択してください</option>
+                            @foreach($cats as $cat)
+                                <option value="{{ $cat->id }}" @if(in_array($cat->id, old('cats', $blog->cats->pluck('id')->all()))) selected @endif>{{ $cat->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>

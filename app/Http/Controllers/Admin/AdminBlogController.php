@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\StoreBlogRequest;
 use App\Http\Requests\Admin\UpdateBlogRequest;
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\Cat;
 use Illuminate\Support\Facades\Storage;
 
 class AdminBlogController extends Controller
@@ -57,7 +58,8 @@ class AdminBlogController extends Controller
     public function edit(Blog $blog)
     {
         $categories = Category::all();
-        return view('admin.blogs.edit', ['blog' => $blog, 'categories' => $categories]);
+        $cats = Cat::all();
+        return view('admin.blogs.edit', ['blog' => $blog, 'categories' => $categories, 'cats' => $cats]);
     }
 
     /**
@@ -76,6 +78,7 @@ class AdminBlogController extends Controller
             $updateData['image'] = $request->file('image')->store('blogs'. 'public');
         }
         $blog->category()->associate($updateData['category_id']);
+        $blog->cats()->sync($updateData['cats'] ?? []);
         $blog->update($updateData);
 
         return to_route('admin.blogs.index')->with('success', 'ブログを更新しました');
