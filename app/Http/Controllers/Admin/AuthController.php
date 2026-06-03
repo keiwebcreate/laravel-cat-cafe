@@ -50,6 +50,6 @@ public function logout(Request $request)
     // セッションを無効化を再生成(セキュリティ対策のため)
     $request->session()->regenerateToken();
 
-    return redirect('/');
+    return redirect('admin.login');
 }
 }
