@@ -10,6 +10,7 @@ use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Cat;
 use Illuminate\Support\Facades\Storage;
+//use Illuminate\Support\Facades\Auth;
 
 class AdminBlogController extends Controller
 {
@@ -18,6 +19,7 @@ class AdminBlogController extends Controller
      */
     public function index()
     {
+        //$user = Illuminate\Support\Facades\Auth::user();
         $blogs = Blog::latest('updated_at')->paginate(10);
         return view('admin.blogs.index', ['blogs' => $blogs]);
     }
